@@ -1,4 +1,5 @@
 export type IdeaStatus = 'open' | 'in-progress' | 'done'
+export type QuestionStatus = 'open' | 'resolved'
 
 export interface ThreadMessage {
   author: string
@@ -26,6 +27,23 @@ export interface Idea {
   thread: ThreadMessage[]
 }
 
+export interface Question {
+  id: string
+  text: string
+  status: QuestionStatus
+  author: { initials: string; color: string; name: string }
+  created: string
+  resolution?: string
+  thread: ThreadMessage[]
+}
+
+export interface LinkedContext {
+  contextId: string
+  title: string
+  color: string
+  relation: string
+}
+
 export interface Context {
   id: string
   title: string
@@ -35,6 +53,8 @@ export interface Context {
   people: { initials: string; color: string }[]
   summary: string
   ideas: Idea[]
+  questions: Question[]
+  linkedContexts: LinkedContext[]
   thread: ThreadMessage[]
 }
 
@@ -111,6 +131,44 @@ export const activeContext: Context = {
       attachments: [],
       thread: [],
     },
+  ],
+  questions: [
+    {
+      id: 'q-1',
+      text: 'Should search results include thread messages or just top-level objects?',
+      status: 'resolved',
+      author: { initials: 'C', color: '#4f46e5', name: 'Chris' },
+      created: '3 days ago',
+      resolution: 'Include thread messages, weighted lower in ranking.',
+      thread: [
+        { author: 'Chris', initials: 'C', color: '#4f46e5', time: '3 days ago', text: 'We need to decide scope. Including threads means more results but better recall.' },
+        { author: 'Seb', initials: 'S', color: '#0891b2', time: '3 days ago', text: 'Include them. People search for things someone said — we can weight them lower.' },
+        { author: 'Maya', initials: 'M', color: '#7c3aed', time: '2 days ago', text: 'Agree. I\'ll make sure the UI can distinguish thread results from top-level ones.' },
+      ],
+    },
+    {
+      id: 'q-2',
+      text: 'Do we need real-time search index updates, or is a 30-second delay acceptable?',
+      status: 'open',
+      author: { initials: 'S', color: '#0891b2', name: 'Seb' },
+      created: '2 days ago',
+      thread: [
+        { author: 'Seb', initials: 'S', color: '#0891b2', time: '2 days ago', text: 'Real-time adds complexity (CDC / event streaming). 30s delay covers 95% of use cases and keeps the pipeline simple.' },
+        { author: 'Chris', initials: 'C', color: '#4f46e5', time: '1 day ago', text: 'Leaning toward 30s for v1. We can always tighten it later. But want Maya\'s input on UX expectations.' },
+      ],
+    },
+    {
+      id: 'q-3',
+      text: 'Should Cmd+K replace the current nav or overlay on top?',
+      status: 'open',
+      author: { initials: 'M', color: '#7c3aed', name: 'Maya' },
+      created: '1 day ago',
+      thread: [],
+    },
+  ],
+  linkedContexts: [
+    { contextId: 'auth-overhaul', title: 'Auth Overhaul', color: '#16a34a', relation: 'Search must respect permission scopes from Auth' },
+    { contextId: 'rate-limiting', title: 'API Rate Limiting', color: '#7c3aed', relation: 'Search API needs rate limit rules' },
   ],
   thread: [
     { author: 'Chris', initials: 'C', color: '#4f46e5', time: '5 days ago', text: 'Kicking off the unified search effort. This is one of our biggest differentiators so let\'s get it right. I\'ve drafted a context with the main ideas broken out — let me know what you think.' },
