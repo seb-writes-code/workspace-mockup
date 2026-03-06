@@ -3,30 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Workspace Mockup</title>
+<title>Context Mockup</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   :root {
     --bg: #fafafa;
-    --sidebar-bg: #f0f0f0;
+    --sidebar-bg: #f5f5f4;
     --panel-bg: #ffffff;
-    --context-bg: #ffffff;
-    --border: #e5e5e5;
-    --text: #1a1a1a;
-    --text-secondary: #6b6b6b;
-    --text-muted: #999;
+    --border: #e7e5e4;
+    --border-light: #f0eeec;
+    --text: #1c1917;
+    --text-secondary: #57534e;
+    --text-muted: #a8a29e;
     --accent: #4f46e5;
     --accent-light: #eef2ff;
     --green: #16a34a;
     --green-light: #f0fdf4;
     --orange: #ea580c;
     --orange-light: #fff7ed;
-    --yellow: #ca8a04;
-    --yellow-light: #fefce8;
-    --red: #dc2626;
-    --red-light: #fef2f2;
-    --hover: #f5f5f5;
+    --hover: #f5f5f4;
+    --card-bg: #ffffff;
+    --card-border: #e7e5e4;
   }
 
   body {
@@ -41,7 +39,7 @@
 
   .layout {
     display: grid;
-    grid-template-columns: 192px 1fr;
+    grid-template-columns: 200px 1fr;
     height: 100vh;
   }
 
@@ -66,11 +64,17 @@
     gap: 8px;
   }
 
-  .sidebar-logo .dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--accent);
+  .sidebar-space-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    flex-shrink: 0;
   }
 
   .sidebar-search {
@@ -96,20 +100,6 @@
     color: var(--text-muted);
   }
 
-  .sidebar-section {
-    padding: 16px 0 4px;
-  }
-
-  .sidebar-section-title {
-    padding: 0 16px;
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--text-muted);
-    margin-bottom: 4px;
-  }
-
   .sidebar-item {
     padding: 5px 16px;
     font-size: 13px;
@@ -120,9 +110,7 @@
     gap: 8px;
   }
 
-  .sidebar-item:hover {
-    background: rgba(0,0,0,0.04);
-  }
+  .sidebar-item:hover { background: rgba(0,0,0,0.04); }
 
   .sidebar-item.active {
     background: rgba(0,0,0,0.06);
@@ -134,36 +122,29 @@
     width: 16px;
     text-align: center;
     font-size: 14px;
-    opacity: 0.6;
-  }
-
-  .sidebar-item .badge {
-    margin-left: auto;
-    font-size: 11px;
-    background: rgba(0,0,0,0.08);
-    color: var(--text-muted);
-    padding: 0 6px;
-    border-radius: 10px;
-    font-weight: 500;
-  }
-
-  .sidebar-space {
-    width: 18px;
-    height: 18px;
-    border-radius: 4px;
-    font-size: 10px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    flex-shrink: 0;
+    opacity: 0.5;
   }
 
   .sidebar-divider {
     height: 1px;
     background: var(--border);
     margin: 8px 12px;
+  }
+
+  .sidebar-section-title {
+    padding: 12px 16px 4px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+  }
+
+  .context-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
   }
 
   .sidebar-bottom {
@@ -180,20 +161,20 @@
     font-size: 13px;
   }
 
-  .sidebar-user .avatar {
-    width: 24px;
-    height: 24px;
+  .avatar {
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
-    background: var(--accent);
-    color: white;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 600;
     display: flex;
     align-items: center;
     justify-content: center;
+    color: white;
+    flex-shrink: 0;
   }
 
-  .sidebar-user .status {
+  .online-dot {
     width: 6px;
     height: 6px;
     border-radius: 50%;
@@ -220,58 +201,36 @@
     flex-shrink: 0;
   }
 
-  .main-header .breadcrumb-sep {
-    color: var(--text-muted);
-  }
-
   .main-header .breadcrumb-current {
     color: var(--text);
     font-weight: 500;
   }
 
+  .breadcrumb-sep { color: var(--text-muted); }
+
   .main-content {
-    padding: 32px 64px;
-    max-width: 780px;
+    padding: 32px 48px 64px;
+    max-width: 860px;
     margin: 0 auto;
     flex: 1;
     width: 100%;
   }
 
-  .issue-id {
-    font-size: 13px;
-    color: var(--text-muted);
-    font-weight: 500;
-    margin-bottom: 8px;
+  /* ── Context Header ── */
+  .context-header {
+    margin-bottom: 28px;
   }
 
-  .issue-title {
-    font-size: 24px;
-    font-weight: 600;
-    letter-spacing: -0.3px;
-    margin-bottom: 16px;
-    line-height: 1.3;
-  }
-
-  .issue-meta {
-    display: flex;
-    gap: 16px;
-    margin-bottom: 24px;
-    flex-wrap: wrap;
-  }
-
-  .meta-item {
+  .context-status-row {
     display: flex;
     align-items: center;
-    gap: 6px;
-    font-size: 13px;
-    color: var(--text-secondary);
-  }
-
-  .meta-label {
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 12px;
     color: var(--text-muted);
   }
 
-  .status-badge {
+  .context-status {
     display: inline-flex;
     align-items: center;
     gap: 5px;
@@ -279,224 +238,210 @@
     border-radius: 4px;
     font-size: 12px;
     font-weight: 500;
-  }
-
-  .status-badge.in-progress {
     background: var(--accent-light);
     color: var(--accent);
   }
 
-  .status-badge.todo {
-    background: var(--orange-light);
-    color: var(--orange);
-  }
-
-  .status-badge.done {
-    background: var(--green-light);
-    color: var(--green);
-  }
-
-  .status-badge .status-dot {
+  .context-status .dot {
     width: 6px;
     height: 6px;
     border-radius: 50%;
     background: currentColor;
   }
 
-  .priority-badge {
+  .context-title {
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: -0.4px;
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+
+  .context-desc {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+  }
+
+  .context-meta {
+    display: flex;
+    gap: 16px;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .context-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .avatar-group {
+    display: flex;
+  }
+
+  .avatar-group .avatar {
+    margin-left: -6px;
+    border: 2px solid white;
+  }
+
+  .avatar-group .avatar:first-child {
+    margin-left: 0;
+  }
+
+  /* ── Content Sections ── */
+  .section {
+    margin-bottom: 28px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .section-title {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: var(--text-muted);
+  }
+
+  .section-count {
+    font-size: 11px;
+    color: var(--text-muted);
+    background: rgba(0,0,0,0.05);
+    padding: 1px 6px;
+    border-radius: 8px;
+  }
+
+  /* ── Cards ── */
+  .card {
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+
+  .card:hover {
+    border-color: #c7c5c2;
+  }
+
+  .card-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .card-icon {
+    font-size: 16px;
+    opacity: 0.45;
+    width: 20px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .card-title {
+    font-size: 14px;
+    font-weight: 500;
+    flex: 1;
+  }
+
+  .card-meta {
+    font-size: 12px;
+    color: var(--text-muted);
+    flex-shrink: 0;
+  }
+
+  .card-subtitle {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-top: 6px;
+    padding-left: 30px;
+    line-height: 1.5;
+  }
+
+  .card-tags {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+    padding-left: 30px;
+  }
+
+  .card-tag {
+    font-size: 11px;
+    padding: 1px 8px;
+    border-radius: 10px;
+    font-weight: 500;
+  }
+
+  .card-tag.doc { background: #dbeafe; color: #2563eb; }
+  .card-tag.spec { background: #f3e8ff; color: #7c3aed; }
+  .card-tag.updated { background: #f0fdf4; color: #16a34a; }
+
+  /* PR card specifics */
+  .pr-stats {
+    display: flex;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .pr-add { color: var(--green); }
+  .pr-del { color: #dc2626; }
+
+  .pr-branch {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 12px;
+    background: rgba(0,0,0,0.04);
+    padding: 1px 6px;
+    border-radius: 4px;
+    color: var(--text-secondary);
+  }
+
+  /* Issue status badges */
+  .issue-status {
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 500;
+    padding: 1px 7px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  .issue-status.open {
+    background: var(--accent-light);
+    color: var(--accent);
+  }
+
+  .issue-status.done {
+    background: var(--green-light);
+    color: var(--green);
+  }
+
+  .issue-status.in-progress {
+    background: var(--orange-light);
     color: var(--orange);
   }
 
-  .label-tag {
-    display: inline-flex;
-    padding: 1px 8px;
-    border-radius: 10px;
-    font-size: 12px;
-    font-weight: 500;
-    background: #f3e8ff;
-    color: #7c3aed;
-  }
-
-  .issue-body {
-    font-size: 14px;
-    line-height: 1.7;
-    color: var(--text);
-    margin-bottom: 32px;
-  }
-
-  .issue-body p {
-    margin-bottom: 12px;
-  }
-
-  .issue-body code {
-    background: rgba(0,0,0,0.05);
-    padding: 1px 5px;
-    border-radius: 3px;
-    font-size: 13px;
-    font-family: 'SF Mono', 'Fira Code', monospace;
-  }
-
-  .inline-ref {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    background: var(--accent-light);
-    color: var(--accent);
-    padding: 1px 8px;
-    border-radius: 4px;
-    font-size: 13px;
-    font-weight: 500;
-    text-decoration: none;
-    cursor: pointer;
-  }
-
-  .inline-ref:hover {
-    background: #dde4ff;
-  }
-
-  /* Sub-issues */
-  .sub-issues {
-    margin-bottom: 32px;
-  }
-
-  .sub-issues-title {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-secondary);
-    margin-bottom: 8px;
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
-  }
-
-  .sub-issue {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 0;
-    border-bottom: 1px solid var(--border);
-    font-size: 13px;
-  }
-
-  .sub-issue:last-child {
-    border-bottom: none;
-  }
-
-  .sub-issue .sub-id {
-    color: var(--text-muted);
-    font-weight: 500;
-    flex-shrink: 0;
-    width: 52px;
-  }
-
-  .sub-issue .sub-title {
-    flex: 1;
-  }
-
-  .sub-issue .sub-assignee {
-    width: 22px;
-    height: 22px;
+  .issue-status .sdot {
+    width: 5px;
+    height: 5px;
     border-radius: 50%;
-    font-size: 10px;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    flex-shrink: 0;
+    background: currentColor;
   }
 
-  /* Linked items */
-  .linked-section {
-    margin-bottom: 24px;
-  }
-
-  .linked-title {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-secondary);
-    margin-bottom: 8px;
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
-  }
-
-  .linked-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 12px;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    margin-bottom: 6px;
-    font-size: 13px;
-    cursor: pointer;
-  }
-
-  .linked-item:hover {
-    background: var(--hover);
-  }
-
-  .linked-item .linked-icon {
-    font-size: 14px;
-    opacity: 0.5;
-    width: 18px;
-    text-align: center;
-  }
-
-  .linked-item .linked-meta {
-    margin-left: auto;
-    font-size: 12px;
-    color: var(--text-muted);
-  }
-
-  /* ── Context Panel ── */
-  .context {
-    background: var(--context-bg);
-    border-left: 1px solid var(--border);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
-
-  .context-header {
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--border);
-    font-size: 13px;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-shrink: 0;
-  }
-
-  .context-tabs {
-    display: flex;
-    border-bottom: 1px solid var(--border);
-    flex-shrink: 0;
-  }
-
-  .context-tab {
-    padding: 8px 16px;
-    font-size: 13px;
-    color: var(--text-muted);
-    cursor: pointer;
-    border-bottom: 2px solid transparent;
-  }
-
-  .context-tab.active {
-    color: var(--text);
-    font-weight: 500;
-    border-bottom-color: var(--accent);
-  }
-
-  .context-body {
-    flex: 1;
-    overflow-y: auto;
-    padding: 16px;
+  /* ── Thread section ── */
+  .thread-section {
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
   }
 
   .thread-message {
@@ -510,45 +455,19 @@
     margin-bottom: 4px;
   }
 
-  .thread-avatar {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    font-size: 10px;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    flex-shrink: 0;
-  }
-
-  .thread-name {
-    font-size: 13px;
-    font-weight: 600;
-  }
-
-  .thread-time {
-    font-size: 12px;
-    color: var(--text-muted);
-  }
+  .thread-name { font-size: 13px; font-weight: 600; }
+  .thread-time { font-size: 12px; color: var(--text-muted); }
 
   .thread-body {
-    padding-left: 32px;
+    padding-left: 30px;
     font-size: 13px;
     line-height: 1.6;
     color: var(--text-secondary);
   }
 
-  .thread-body p {
-    margin-bottom: 6px;
-  }
+  .thread-body p { margin-bottom: 4px; }
 
-  .thread-body .mention {
-    color: var(--accent);
-    font-weight: 500;
-  }
-
+  .thread-body .mention { color: var(--accent); font-weight: 500; }
   .thread-body .ref {
     color: var(--accent);
     background: var(--accent-light);
@@ -559,85 +478,8 @@
 
   .thread-divider {
     border: none;
-    border-top: 1px solid var(--border);
+    border-top: 1px solid var(--border-light);
     margin: 12px 0;
-  }
-
-  .thread-input {
-    padding: 12px 16px;
-    border-top: 1px solid var(--border);
-    flex-shrink: 0;
-  }
-
-  .thread-input-box {
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 10px 12px;
-    font-size: 13px;
-    color: var(--text-muted);
-    cursor: text;
-  }
-
-  /* Activity items in context */
-  .activity-item {
-    display: flex;
-    gap: 10px;
-    padding: 8px 0;
-    font-size: 13px;
-    color: var(--text-secondary);
-    align-items: flex-start;
-  }
-
-  .activity-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--border);
-    margin-top: 6px;
-    flex-shrink: 0;
-  }
-
-  .activity-item strong {
-    font-weight: 600;
-    color: var(--text);
-  }
-
-  .activity-time {
-    font-size: 12px;
-    color: var(--text-muted);
-    margin-top: 2px;
-  }
-
-  /* Details in context panel */
-  .detail-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 0;
-    font-size: 13px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .detail-row:last-child {
-    border-bottom: none;
-  }
-
-  .detail-label {
-    color: var(--text-muted);
-  }
-
-  .detail-value {
-    color: var(--text);
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .thread-section {
-    margin-top: 8px;
-    padding-top: 24px;
-    border-top: 1px solid var(--border);
   }
 
   .thread-reply-box {
@@ -649,6 +491,51 @@
     color: var(--text-muted);
     cursor: text;
   }
+
+  /* ── AI summary ── */
+  .ai-summary {
+    background: linear-gradient(135deg, #f8f7ff 0%, #f0f4ff 100%);
+    border: 1px solid #e0ddf5;
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 24px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text-secondary);
+  }
+
+  .ai-summary-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: var(--accent);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  /* ── Add button ── */
+  .add-to-context {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 13px;
+    color: var(--text-muted);
+    cursor: pointer;
+    margin-bottom: 28px;
+  }
+
+  .add-to-context:hover {
+    border-color: #c7c5c2;
+    color: var(--text-secondary);
+    background: var(--hover);
+  }
 </style>
 </head>
 <body>
@@ -658,7 +545,7 @@
   <!-- ── Sidebar ── -->
   <aside class="sidebar">
     <div class="sidebar-logo">
-      <span class="sidebar-space" style="background: #4f46e5;">P</span>
+      <span class="sidebar-space-icon" style="background: #4f46e5;">P</span>
       Platform
     </div>
 
@@ -676,27 +563,38 @@
 
     <div class="sidebar-divider"></div>
 
+    <div class="sidebar-section-title">Contexts</div>
+
     <div class="sidebar-item active">
-      <span class="icon">&#x25A1;</span> Issues
+      <span class="context-dot" style="background: var(--accent);"></span>
+      Unified Search
     </div>
     <div class="sidebar-item">
-      <span class="icon">&#x25A8;</span> Board
+      <span class="context-dot" style="background: var(--green);"></span>
+      Auth Overhaul
     </div>
     <div class="sidebar-item">
-      <span class="icon">&#x2637;</span> Repos
+      <span class="context-dot" style="background: var(--orange);"></span>
+      Onboarding Flow v2
     </div>
     <div class="sidebar-item">
-      <span class="icon">&#x2630;</span> Docs
+      <span class="context-dot" style="background: #7c3aed;"></span>
+      API Rate Limiting
     </div>
     <div class="sidebar-item">
-      <span class="icon">&#x25C9;</span> Feed
+      <span class="context-dot" style="background: #0891b2;"></span>
+      Dark Mode
+    </div>
+    <div class="sidebar-item">
+      <span class="context-dot" style="background: var(--text-muted);"></span>
+      Billing Migration
     </div>
 
     <div class="sidebar-bottom">
       <div class="sidebar-user">
-        <span class="avatar">C</span>
+        <span class="avatar" style="background: #4f46e5;">C</span>
         Chris
-        <span class="status"></span>
+        <span class="online-dot"></span>
       </div>
     </div>
   </aside>
@@ -704,107 +602,160 @@
   <!-- ── Main Panel ── -->
   <main class="main">
     <div class="main-header">
-      <span>Issues</span>
+      <span>Contexts</span>
       <span class="breadcrumb-sep">/</span>
-      <span class="breadcrumb-current">PLT-142</span>
+      <span class="breadcrumb-current">Unified Search</span>
     </div>
 
     <div class="main-content">
-      <div class="issue-id">PLT-142</div>
-      <h1 class="issue-title">Implement unified search across all content types</h1>
 
-      <div class="issue-meta">
-        <div class="meta-item">
-          <span class="status-badge in-progress">
-            <span class="status-dot"></span>
-            In Progress
-          </span>
+      <!-- Context Header -->
+      <div class="context-header">
+        <div class="context-status-row">
+          <span class="context-status"><span class="dot"></span> Active</span>
+          <span>Created 5 days ago</span>
         </div>
-        <div class="meta-item">
-          <span class="priority-badge">&#x25B2; High</span>
-        </div>
-        <div class="meta-item">
-          <span class="label-tag">core</span>
-        </div>
-        <div class="meta-item">
-          <span class="meta-label">Assigned</span>
-          <span style="display:inline-flex;align-items:center;gap:4px;">
-            <span style="width:20px;height:20px;border-radius:50%;background:#4f46e5;color:white;font-size:10px;font-weight:600;display:inline-flex;align-items:center;justify-content:center;">C</span>
-            Chris
-          </span>
-        </div>
-        <div class="meta-item">
-          <span class="meta-label">Cycle</span>
-          <span>Sprint 14</span>
+        <h1 class="context-title">Unified Search</h1>
+        <p class="context-desc">Build a single search experience across all content types &mdash; issues, docs, threads, code, and PRs. Users should be able to search once and find everything, with filters and rich previews.</p>
+        <div class="context-meta">
+          <div class="context-meta-item">
+            <div class="avatar-group">
+              <span class="avatar" style="background: #4f46e5;">C</span>
+              <span class="avatar" style="background: #0891b2;">S</span>
+              <span class="avatar" style="background: #7c3aed;">M</span>
+            </div>
+            3 people
+          </div>
+          <div class="context-meta-item">6 items</div>
         </div>
       </div>
 
-      <div class="issue-body">
-        <p>Users need a single search that works across all content types &mdash; issues, docs, threads, code, and PRs. This is one of the key differentiators: instead of searching four different tools, you search once and find everything.</p>
-        <p>The search should support natural language queries, filters (e.g. <code>type:doc author:chris</code>), and show results grouped by content type with rich previews. See the full spec in <a class="inline-ref">&#x2630; Search Architecture Spec</a> and the design explorations in <a class="inline-ref">&#x2630; Search UI Explorations</a>.</p>
-        <p>We should index content incrementally as it's created/updated, not batch. Full-text search with <code>pg_trgm</code> gets us started, we can add a dedicated search engine later if needed.</p>
+      <!-- AI Summary -->
+      <div class="ai-summary">
+        <div class="ai-summary-label">&#x2728; AI Summary</div>
+        Index pipeline is complete and deployed. Chris is building the search API with filters and ranking. Maya is designing the results UI with grouped preview cards. Remaining work: finish API endpoint, build results UI, and integrate into Cmd+K.
       </div>
 
-      <div class="sub-issues">
-        <div class="sub-issues-title">Sub-issues</div>
-        <div class="sub-issue">
-          <span class="status-badge done" style="padding:1px 6px;"><span class="status-dot"></span></span>
-          <span class="sub-id">PLT-143</span>
-          <span class="sub-title">Set up search index schema and ingestion pipeline</span>
-          <span class="sub-assignee" style="background:#0891b2;">S</span>
+      <!-- Documents -->
+      <div class="section">
+        <div class="section-header">
+          <span class="section-title">Documents</span>
+          <span class="section-count">2</span>
         </div>
-        <div class="sub-issue">
-          <span class="status-badge in-progress" style="padding:1px 6px;"><span class="status-dot"></span></span>
-          <span class="sub-id">PLT-144</span>
-          <span class="sub-title">Build search API endpoint with filters and ranking</span>
-          <span class="sub-assignee" style="background:#4f46e5;">C</span>
-        </div>
-        <div class="sub-issue">
-          <span class="status-badge todo" style="padding:1px 6px;"><span class="status-dot"></span></span>
-          <span class="sub-id">PLT-145</span>
-          <span class="sub-title">Search results UI with grouped preview cards</span>
-          <span class="sub-assignee" style="background:#7c3aed;">M</span>
-        </div>
-        <div class="sub-issue">
-          <span class="status-badge todo" style="padding:1px 6px;"><span class="status-dot"></span></span>
-          <span class="sub-id">PLT-146</span>
-          <span class="sub-title">Integrate search into Cmd+K command bar</span>
-          <span class="sub-assignee" style="background:#4f46e5;">C</span>
-        </div>
-      </div>
 
-      <div class="linked-section">
-        <div class="linked-title">Linked</div>
-        <div class="linked-item">
-          <span class="linked-icon">&#x2637;</span>
-          <span>feat/unified-search</span>
-          <span class="linked-meta" style="color:var(--green);">+842 &minus;31</span>
-          <span class="linked-meta">PR #89 &middot; 2 commits ahead</span>
+        <div class="card">
+          <div class="card-row">
+            <span class="card-icon">&#x2630;</span>
+            <span class="card-title">Search Architecture Spec</span>
+            <span class="card-meta">Updated 2d ago</span>
+          </div>
+          <div class="card-subtitle">Covers index schema, query pipeline, ranking algorithm, and performance requirements. Includes decision to start with pg_trgm.</div>
+          <div class="card-tags">
+            <span class="card-tag spec">spec</span>
+            <span class="card-tag updated">updated</span>
+          </div>
         </div>
-        <div class="linked-item">
-          <span class="linked-icon">&#x2630;</span>
-          <span>Search Architecture Spec</span>
-          <span class="linked-meta">Updated 2d ago</span>
-        </div>
-        <div class="linked-item">
-          <span class="linked-icon">&#x2630;</span>
-          <span>Search UI Explorations</span>
-          <span class="linked-meta">Updated 4d ago</span>
+
+        <div class="card">
+          <div class="card-row">
+            <span class="card-icon">&#x2630;</span>
+            <span class="card-title">Search UI Explorations</span>
+            <span class="card-meta">Updated 4d ago</span>
+          </div>
+          <div class="card-subtitle">Design explorations for search results layout. Grouped by type with tabs: All | Issues | Docs | Code | Threads.</div>
+          <div class="card-tags">
+            <span class="card-tag doc">design</span>
+          </div>
         </div>
       </div>
 
+      <!-- Code -->
+      <div class="section">
+        <div class="section-header">
+          <span class="section-title">Code</span>
+          <span class="section-count">1</span>
+        </div>
+
+        <div class="card">
+          <div class="card-row">
+            <span class="card-icon">&#x2637;</span>
+            <span class="card-title">feat/unified-search</span>
+            <span class="pr-stats">
+              <span class="pr-add">+842</span>
+              <span class="pr-del">&minus;31</span>
+            </span>
+            <span class="card-meta">PR #89 &middot; Open</span>
+          </div>
+          <div class="card-subtitle" style="display:flex;align-items:center;gap:8px;">
+            <span class="pr-branch">feat/unified-search</span>
+            <span style="color:var(--text-muted);font-size:12px;">&#x2190; main</span>
+            <span style="margin-left:auto;">
+              <span class="avatar" style="background:#4f46e5;width:18px;height:18px;font-size:9px;">C</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Issues -->
+      <div class="section">
+        <div class="section-header">
+          <span class="section-title">Issues</span>
+          <span class="section-count">4</span>
+        </div>
+
+        <div class="card">
+          <div class="card-row">
+            <span class="issue-status done"><span class="sdot"></span> Done</span>
+            <span class="card-title">Set up search index schema and ingestion pipeline</span>
+            <span class="avatar" style="background:#0891b2;width:20px;height:20px;font-size:9px;">S</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-row">
+            <span class="issue-status in-progress"><span class="sdot"></span> In Progress</span>
+            <span class="card-title">Build search API endpoint with filters and ranking</span>
+            <span class="avatar" style="background:#4f46e5;width:20px;height:20px;font-size:9px;">C</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-row">
+            <span class="issue-status open"><span class="sdot"></span> Open</span>
+            <span class="card-title">Search results UI with grouped preview cards</span>
+            <span class="avatar" style="background:#7c3aed;width:20px;height:20px;font-size:9px;">M</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-row">
+            <span class="issue-status open"><span class="sdot"></span> Open</span>
+            <span class="card-title">Integrate search into Cmd+K command bar</span>
+            <span class="avatar" style="background:#4f46e5;width:20px;height:20px;font-size:9px;">C</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add to context -->
+      <div class="add-to-context">
+        + Add to this context
+      </div>
+
+      <!-- Thread -->
       <div class="thread-section">
-        <div class="linked-title">Thread</div>
+        <div class="section-header">
+          <span class="section-title">Thread</span>
+        </div>
 
         <div class="thread-message">
           <div class="thread-message-header">
-            <span class="thread-avatar" style="background:#4f46e5;">C</span>
+            <span class="avatar" style="background:#4f46e5;">C</span>
             <span class="thread-name">Chris</span>
             <span class="thread-time">2 days ago</span>
           </div>
           <div class="thread-body">
-            <p>Started working on the search API. Going with <span class="ref">pg_trgm</span> for now since we're already on Postgres. Should be fast enough for our scale.</p>
-            <p>One question &mdash; should search results include thread messages or just top-level objects?</p>
+            <p>Started working on the search API. Going with <span class="ref">pg_trgm</span> for now. Should be fast enough for our scale.</p>
+            <p>Should search results include thread messages or just top-level objects?</p>
           </div>
         </div>
 
@@ -812,12 +763,12 @@
 
         <div class="thread-message">
           <div class="thread-message-header">
-            <span class="thread-avatar" style="background:#0891b2;">S</span>
+            <span class="avatar" style="background:#0891b2;">S</span>
             <span class="thread-name">Seb</span>
             <span class="thread-time">2 days ago</span>
           </div>
           <div class="thread-body">
-            <p>I'd include thread messages too &mdash; people often search for something someone <em>said</em>, not just a doc title. We can weight them lower in ranking so they don't drown out primary objects.</p>
+            <p>Include thread messages too &mdash; people search for things someone <em>said</em>, not just titles. We can weight them lower in ranking.</p>
           </div>
         </div>
 
@@ -825,13 +776,12 @@
 
         <div class="thread-message">
           <div class="thread-message-header">
-            <span class="thread-avatar" style="background:#7c3aed;">M</span>
+            <span class="avatar" style="background:#7c3aed;">M</span>
             <span class="thread-name">Maya</span>
             <span class="thread-time">yesterday</span>
           </div>
           <div class="thread-body">
-            <p>Agree with <span class="mention">@Seb</span>. Also, for the results UI I'm thinking we group by type with tabs: All | Issues | Docs | Code | Threads. Each result shows a 2-line preview with the match highlighted.</p>
-            <p>I'll push some designs to <span class="ref">Search UI Explorations</span> today.</p>
+            <p>Agree with <span class="mention">@Seb</span>. For the results UI I'm thinking grouped by type with tabs. Each result shows a 2-line preview with highlighted match. Pushing designs to <span class="ref">Search UI Explorations</span> today.</p>
           </div>
         </div>
 
@@ -839,25 +789,12 @@
 
         <div class="thread-message">
           <div class="thread-message-header">
-            <span class="thread-avatar" style="background:#4f46e5;">C</span>
-            <span class="thread-name">Chris</span>
-            <span class="thread-time">yesterday</span>
-          </div>
-          <div class="thread-body">
-            <p>Makes sense. I'll add message content to the index. <span class="mention">@Maya</span> that UI approach sounds great &mdash; let's go with that.</p>
-          </div>
-        </div>
-
-        <hr class="thread-divider">
-
-        <div class="thread-message">
-          <div class="thread-message-header">
-            <span class="thread-avatar" style="background:#0891b2;">S</span>
+            <span class="avatar" style="background:#0891b2;">S</span>
             <span class="thread-name">Seb</span>
             <span class="thread-time">3 hours ago</span>
           </div>
           <div class="thread-body">
-            <p>Index pipeline is done and deployed. All existing content is indexed. New content gets indexed within ~200ms of creation. <span class="ref">PLT-143</span> is good to close.</p>
+            <p>Index pipeline is done and deployed. All existing content indexed. New content gets indexed within ~200ms of creation.</p>
           </div>
         </div>
 
@@ -868,7 +805,6 @@
 
     </div>
   </main>
-
 
 </div>
 
