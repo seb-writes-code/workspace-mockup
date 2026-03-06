@@ -41,7 +41,7 @@
 
   .layout {
     display: grid;
-    grid-template-columns: 220px 1fr 340px;
+    grid-template-columns: 192px 1fr 340px;
     height: 100vh;
   }
 
@@ -640,8 +640,8 @@
   <!-- ── Sidebar ── -->
   <aside class="sidebar">
     <div class="sidebar-logo">
-      <span class="dot"></span>
-      Workspace
+      <span class="sidebar-space" style="background: #4f46e5;">P</span>
+      Platform
     </div>
 
     <div class="sidebar-search">
@@ -662,39 +662,20 @@
 
     <div class="sidebar-divider"></div>
 
-    <div class="sidebar-section">
-      <div class="sidebar-section-title">Spaces</div>
-      <div class="sidebar-item active">
-        <span class="sidebar-space" style="background: #4f46e5;">P</span> Platform
-      </div>
-      <div class="sidebar-item">
-        <span class="sidebar-space" style="background: #0891b2;">A</span> API
-      </div>
-      <div class="sidebar-item">
-        <span class="sidebar-space" style="background: #7c3aed;">D</span> Design System
-      </div>
-      <div class="sidebar-item">
-        <span class="sidebar-space" style="background: #059669;">I</span> Infrastructure
-      </div>
+    <div class="sidebar-item active">
+      <span class="icon">&#x25A1;</span> Issues
     </div>
-
-    <div class="sidebar-section">
-      <div class="sidebar-section-title">Platform</div>
-      <div class="sidebar-item active">
-        <span class="icon">&#x25A1;</span> Issues
-      </div>
-      <div class="sidebar-item">
-        <span class="icon">&#x25A8;</span> Board
-      </div>
-      <div class="sidebar-item">
-        <span class="icon">&#x2637;</span> Repos
-      </div>
-      <div class="sidebar-item">
-        <span class="icon">&#x2630;</span> Docs
-      </div>
-      <div class="sidebar-item">
-        <span class="icon">&#x25C9;</span> Feed
-      </div>
+    <div class="sidebar-item">
+      <span class="icon">&#x25A8;</span> Board
+    </div>
+    <div class="sidebar-item">
+      <span class="icon">&#x2637;</span> Repos
+    </div>
+    <div class="sidebar-item">
+      <span class="icon">&#x2630;</span> Docs
+    </div>
+    <div class="sidebar-item">
+      <span class="icon">&#x25C9;</span> Feed
     </div>
 
     <div class="sidebar-bottom">
@@ -709,8 +690,6 @@
   <!-- ── Main Panel ── -->
   <main class="main">
     <div class="main-header">
-      <span>Platform</span>
-      <span class="breadcrumb-sep">/</span>
       <span>Issues</span>
       <span class="breadcrumb-sep">/</span>
       <span class="breadcrumb-current">PLT-142</span>
