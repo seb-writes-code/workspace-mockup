@@ -41,7 +41,7 @@
 
   .layout {
     display: grid;
-    grid-template-columns: 192px 1fr 340px;
+    grid-template-columns: 192px 1fr;
     height: 100vh;
   }
 
@@ -230,9 +230,11 @@
   }
 
   .main-content {
-    padding: 32px 48px;
-    max-width: 800px;
+    padding: 32px 64px;
+    max-width: 780px;
+    margin: 0 auto;
     flex: 1;
+    width: 100%;
   }
 
   .issue-id {
@@ -631,6 +633,22 @@
     align-items: center;
     gap: 6px;
   }
+
+  .thread-section {
+    margin-top: 8px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  .thread-reply-box {
+    margin-top: 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 13px;
+    color: var(--text-muted);
+    cursor: text;
+  }
 </style>
 </head>
 <body>
@@ -649,10 +667,6 @@
       <kbd>&#8984;K</kbd>
     </div>
 
-    <div class="sidebar-item">
-      <span class="icon">&#x2709;</span> Inbox
-      <span class="badge">3</span>
-    </div>
     <div class="sidebar-item">
       <span class="icon">&#x2606;</span> My Work
     </div>
@@ -779,95 +793,82 @@
         </div>
       </div>
 
+      <div class="thread-section">
+        <div class="linked-title">Thread</div>
+
+        <div class="thread-message">
+          <div class="thread-message-header">
+            <span class="thread-avatar" style="background:#4f46e5;">C</span>
+            <span class="thread-name">Chris</span>
+            <span class="thread-time">2 days ago</span>
+          </div>
+          <div class="thread-body">
+            <p>Started working on the search API. Going with <span class="ref">pg_trgm</span> for now since we're already on Postgres. Should be fast enough for our scale.</p>
+            <p>One question &mdash; should search results include thread messages or just top-level objects?</p>
+          </div>
+        </div>
+
+        <hr class="thread-divider">
+
+        <div class="thread-message">
+          <div class="thread-message-header">
+            <span class="thread-avatar" style="background:#0891b2;">S</span>
+            <span class="thread-name">Seb</span>
+            <span class="thread-time">2 days ago</span>
+          </div>
+          <div class="thread-body">
+            <p>I'd include thread messages too &mdash; people often search for something someone <em>said</em>, not just a doc title. We can weight them lower in ranking so they don't drown out primary objects.</p>
+          </div>
+        </div>
+
+        <hr class="thread-divider">
+
+        <div class="thread-message">
+          <div class="thread-message-header">
+            <span class="thread-avatar" style="background:#7c3aed;">M</span>
+            <span class="thread-name">Maya</span>
+            <span class="thread-time">yesterday</span>
+          </div>
+          <div class="thread-body">
+            <p>Agree with <span class="mention">@Seb</span>. Also, for the results UI I'm thinking we group by type with tabs: All | Issues | Docs | Code | Threads. Each result shows a 2-line preview with the match highlighted.</p>
+            <p>I'll push some designs to <span class="ref">Search UI Explorations</span> today.</p>
+          </div>
+        </div>
+
+        <hr class="thread-divider">
+
+        <div class="thread-message">
+          <div class="thread-message-header">
+            <span class="thread-avatar" style="background:#4f46e5;">C</span>
+            <span class="thread-name">Chris</span>
+            <span class="thread-time">yesterday</span>
+          </div>
+          <div class="thread-body">
+            <p>Makes sense. I'll add message content to the index. <span class="mention">@Maya</span> that UI approach sounds great &mdash; let's go with that.</p>
+          </div>
+        </div>
+
+        <hr class="thread-divider">
+
+        <div class="thread-message">
+          <div class="thread-message-header">
+            <span class="thread-avatar" style="background:#0891b2;">S</span>
+            <span class="thread-name">Seb</span>
+            <span class="thread-time">3 hours ago</span>
+          </div>
+          <div class="thread-body">
+            <p>Index pipeline is done and deployed. All existing content is indexed. New content gets indexed within ~200ms of creation. <span class="ref">PLT-143</span> is good to close.</p>
+          </div>
+        </div>
+
+        <div class="thread-reply-box">
+          Reply... <span style="font-size:12px;color:#ccc;">/ for commands</span>
+        </div>
+      </div>
+
     </div>
   </main>
 
-  <!-- ── Context Panel ── -->
-  <aside class="context">
-    <div class="context-header">
-      Thread &middot; PLT-142
-    </div>
-    <div class="context-tabs">
-      <div class="context-tab active">Thread</div>
-      <div class="context-tab">Activity</div>
-      <div class="context-tab">Details</div>
-    </div>
-
-    <div class="context-body">
-
-      <div class="thread-message">
-        <div class="thread-message-header">
-          <span class="thread-avatar" style="background:#4f46e5;">C</span>
-          <span class="thread-name">Chris</span>
-          <span class="thread-time">2 days ago</span>
-        </div>
-        <div class="thread-body">
-          <p>Started working on the search API. Going with <span class="ref">pg_trgm</span> for now since we're already on Postgres. Should be fast enough for our scale.</p>
-          <p>One question &mdash; should search results include thread messages or just top-level objects?</p>
-        </div>
-      </div>
-
-      <hr class="thread-divider">
-
-      <div class="thread-message">
-        <div class="thread-message-header">
-          <span class="thread-avatar" style="background:#0891b2;">S</span>
-          <span class="thread-name">Seb</span>
-          <span class="thread-time">2 days ago</span>
-        </div>
-        <div class="thread-body">
-          <p>I'd include thread messages too &mdash; people often search for something someone <em>said</em>, not just a doc title. We can weight them lower in ranking so they don't drown out primary objects.</p>
-        </div>
-      </div>
-
-      <hr class="thread-divider">
-
-      <div class="thread-message">
-        <div class="thread-message-header">
-          <span class="thread-avatar" style="background:#7c3aed;">M</span>
-          <span class="thread-name">Maya</span>
-          <span class="thread-time">yesterday</span>
-        </div>
-        <div class="thread-body">
-          <p>Agree with <span class="mention">@Seb</span>. Also, for the results UI I'm thinking we group by type with tabs: All | Issues | Docs | Code | Threads. Each result shows a 2-line preview with the match highlighted.</p>
-          <p>I'll push some designs to <span class="ref">Search UI Explorations</span> today.</p>
-        </div>
-      </div>
-
-      <hr class="thread-divider">
-
-      <div class="thread-message">
-        <div class="thread-message-header">
-          <span class="thread-avatar" style="background:#4f46e5;">C</span>
-          <span class="thread-name">Chris</span>
-          <span class="thread-time">yesterday</span>
-        </div>
-        <div class="thread-body">
-          <p>Makes sense. I'll add message content to the index. <span class="mention">@Maya</span> that UI approach sounds great &mdash; let's go with that.</p>
-        </div>
-      </div>
-
-      <hr class="thread-divider">
-
-      <div class="thread-message">
-        <div class="thread-message-header">
-          <span class="thread-avatar" style="background:#0891b2;">S</span>
-          <span class="thread-name">Seb</span>
-          <span class="thread-time">3 hours ago</span>
-        </div>
-        <div class="thread-body">
-          <p>Index pipeline is done and deployed. All existing content is indexed. New content gets indexed within ~200ms of creation. <span class="ref">PLT-143</span> is good to close.</p>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="thread-input">
-      <div class="thread-input-box">
-        Reply... &nbsp; <span style="font-size:12px;color:#ccc;">/ for commands</span>
-      </div>
-    </div>
-  </aside>
 
 </div>
 
