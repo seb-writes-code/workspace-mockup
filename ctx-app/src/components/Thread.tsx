@@ -10,17 +10,17 @@ export function Thread({ messages, compact }: ThreadProps) {
   if (messages.length === 0) return null
 
   return (
-    <div className={compact ? '' : 'border-t border-border-light pt-3'}>
+    <div className={compact ? '' : 'border-t border-border-light pt-3.5'}>
       {!compact && (
-        <div className="text-[11px] font-semibold uppercase tracking-wide text-muted mb-2.5">
+        <div className="text-[11px] font-semibold uppercase tracking-wide text-muted mb-3">
           Thread
         </div>
       )}
 
       {messages.map((msg, i) => (
         <div key={i}>
-          {i > 0 && <hr className="border-t border-border-light my-2" />}
-          <div className="mb-3">
+          {i > 0 && <hr className="border-t border-border-light my-2.5" />}
+          <div className="mb-3.5">
             <div className="flex items-center gap-1.5 mb-1">
               <UserAvatar initials={msg.initials} color={msg.color} size={20} />
               <span className="text-[13px] font-semibold">{msg.author}</span>
@@ -33,7 +33,7 @@ export function Thread({ messages, compact }: ThreadProps) {
         </div>
       ))}
 
-      <div className="mt-2.5 border border-border rounded-md px-2.5 py-2 text-[13px] text-muted cursor-text">
+      <div className="mt-3 border border-border rounded-md px-3 py-2.5 text-[13px] text-muted cursor-text">
         Reply...
       </div>
     </div>

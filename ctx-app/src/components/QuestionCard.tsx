@@ -27,7 +27,7 @@ export function QuestionCard({ question, defaultExpanded = false }: QuestionCard
 
   return (
     <div
-      className={`border rounded-lg mb-2 transition-all ${
+      className={`border rounded-lg mb-2.5 transition-all ${
         expanded
           ? question.status === 'open'
             ? 'border-[#d97706] border-[1.5px]'
@@ -37,7 +37,7 @@ export function QuestionCard({ question, defaultExpanded = false }: QuestionCard
     >
       {/* Header */}
       <div
-        className="flex items-center gap-2.5 px-4 py-3 cursor-pointer select-none"
+        className="flex items-center gap-2.5 px-4 py-3.5 cursor-pointer select-none"
         onClick={() => setExpanded(!expanded)}
       >
         <QuestionBadge status={question.status} />
@@ -55,10 +55,10 @@ export function QuestionCard({ question, defaultExpanded = false }: QuestionCard
 
       {/* Expanded */}
       {expanded && (
-        <div className="px-4 pb-4 border-t border-border-light">
+        <div className="px-4 pb-5 border-t border-border-light">
           {/* Resolution */}
           {question.resolution && (
-            <div className="mt-3 mb-2 bg-[#f0fdf4] border border-[#bbf7d0] rounded-md px-3 py-2.5 text-[13px] text-[#166534]">
+            <div className="mt-3.5 mb-3 bg-[#f0fdf4] border border-[#bbf7d0] rounded-md px-3.5 py-3 text-[13px] text-[#166534]">
               <span className="text-[11px] font-semibold uppercase tracking-wide text-[#15803d] block mb-1">
                 Resolution
               </span>

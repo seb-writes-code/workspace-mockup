@@ -59,13 +59,13 @@ export function IdeaCard({ idea, momentum, defaultExpanded = false }: IdeaCardPr
 
   return (
     <div
-      className={`border rounded-lg mb-2 transition-all ${
+      className={`border rounded-lg mb-2.5 transition-all ${
         expanded ? 'border-accent border-[1.5px]' : 'border-border hover:border-[#c7c5c2]'
       }`}
     >
       {/* Header - always visible */}
       <div
-        className="flex items-center gap-2.5 px-4 py-3 cursor-pointer select-none"
+        className="flex items-center gap-2.5 px-4 py-3.5 cursor-pointer select-none"
         onClick={() => setExpanded(!expanded)}
       >
         <StatusBadge status={idea.status} />
@@ -89,7 +89,7 @@ export function IdeaCard({ idea, momentum, defaultExpanded = false }: IdeaCardPr
 
       {/* Expanded content */}
       {expanded && (
-        <div className="px-4 pb-4 border-t border-border-light">
+        <div className="px-4 pb-5 border-t border-border-light">
           {/* Description */}
           {idea.description && (
             <div className="text-[13px] leading-relaxed text-muted-foreground py-3">
@@ -99,7 +99,7 @@ export function IdeaCard({ idea, momentum, defaultExpanded = false }: IdeaCardPr
 
           {/* Attachments */}
           {idea.attachments.length > 0 && (
-            <div className="flex flex-col gap-1.5 mb-3">
+            <div className="flex flex-col gap-2 mb-4">
               {idea.attachments.map((att, i) => (
                 <div
                   key={i}
